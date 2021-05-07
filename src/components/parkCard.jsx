@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ParkCard() {
+function ParkCard(props) {
   const classes = useStyles();
 
   return (
@@ -24,12 +24,12 @@ function ParkCard() {
         <CardMedia
           className={classes.media}
           image="roosevelt-park.jpg"
-          title="Contemplative Reptile"
+          title={props.park.name}
         />
         <CardContent>
-          <Typography variant="h5">Roosevelt Park</Typography>
+          <Typography variant="h5">{props.park.name}</Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            100 miles
+            {props.park.distance} miles
           </Typography>
         </CardContent>
       </CardActionArea>
