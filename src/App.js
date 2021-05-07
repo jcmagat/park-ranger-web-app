@@ -1,9 +1,25 @@
+import { useEffect, useState } from "react";
 import ParkCard from "./components/parkCard";
 import Grid from "@material-ui/core/Grid";
-import TestData from "./test.json";
+import axios from "axios";
 
 function App() {
-  const parks = TestData.data;
+  const [parks, getParks] = useState([]);
+
+  useEffect(() => {
+    getNearbyParks();
+  }, []);
+
+  const getNearbyParks = () => {
+    axios
+      .get(
+        "http://localhost:5000/api/v1/parks/nearby?long=-122.392605&lat=37.604284&dist=1000"
+      )
+      .then((response) => {
+        const allParks = response.data.data;
+        getParks(allParks);
+      });
+  };
 
   return (
     <div className="App">
