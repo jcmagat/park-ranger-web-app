@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import ParkCard from "./components/parkCard";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  gridContainer: {
+    padding: "40px",
+  },
+});
 
 function App() {
+  const classes = useStyles();
+
   const [parks, getParks] = useState([]);
 
   useEffect(() => {
@@ -22,17 +31,13 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Grid container spacing={3} direction="column">
-          <Grid item xs={6}>
-            {parks.map((park) => (
-              <ParkCard key={park._id} park={park} />
-            ))}
-          </Grid>
+    <Grid container spacing={4} className={classes.gridContainer}>
+      {parks.map((park) => (
+        <Grid item xs={12} sm={6} md={4}>
+          <ParkCard key={park._id} park={park} />
         </Grid>
-      </header>
-    </div>
+      ))}
+    </Grid>
   );
 }
 
